@@ -12,7 +12,7 @@ public class Main {
 		while(true) {
 			Thread.sleep(50); //每隔 50 毫米，窗口重画一次，调用一次 paint 方法
 			tf.repaint();
-		}
+		} 
 
 	}
 
