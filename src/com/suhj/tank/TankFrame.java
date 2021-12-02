@@ -24,7 +24,9 @@ public class TankFrame extends Frame {
 //	private static Dir dir = Dir.DOWN;
 	
 	//用一个对象来代表坦克
-	Tank myTank = new Tank(200, 200, Dir.DOWN);
+	Tank myTank = new Tank(200, 200, Dir.DOWN, this);
+	
+	Bullet b = new Bullet(300, 300, Dir.DOWN); 
 	
 	static final int GAME_WIDTH = 800 , GAME_HEIGHT = 600; ;
 	
@@ -54,7 +56,19 @@ public class TankFrame extends Frame {
 	}
 	
 	
-	
+	public Bullet getB() {
+		return b;
+	}
+
+
+	public void setB(Bullet b) {
+		this.b = b;
+	}
+
+
+
+
+
 
 	/**
 	 * 画笔，系统自动调用方法
@@ -91,10 +105,7 @@ public class TankFrame extends Frame {
 	public void paint(Graphics g) {
 		
 		myTank.paint(g);
-		if(myTank.isShooting()){
-			
-			new Tank(myTank.getX(), myTank.getY(), Dir.DOWN).paint(g);
-			}
+		b.paint(g);
 
  	}
 	
@@ -124,7 +135,6 @@ public class TankFrame extends Frame {
 		    	case KeyEvent.VK_UP: bU = true;  break;		    
 		    	case KeyEvent.VK_RIGHT: bR = true; break;
 		    	case KeyEvent.VK_DOWN: bD = true; break;
-		    	case KeyEvent.CTRL_DOWN_MASK:myTank.setShooting(true); break;
 		    	default:break;   
 		    }
 		    
@@ -148,7 +158,7 @@ public class TankFrame extends Frame {
 		    	case KeyEvent.VK_UP: bU = false;  break;		    
 		    	case KeyEvent.VK_RIGHT: bR = false; break;
 		    	case KeyEvent.VK_DOWN: bD = false; break;
-		    	case KeyEvent.CTRL_DOWN_MASK:myTank.setShooting(false); break;
+		    	case KeyEvent.VK_CONTROL:myTank.fire(); break;
 		    	default:break;
 		    }
 		    

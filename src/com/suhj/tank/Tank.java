@@ -14,7 +14,8 @@ public class Tank {
 	private Dir dir;
 	private final int SPEED = 5;
 	private boolean moving = false;
-	private boolean shooting = false;
+ 	
+	private TankFrame tf;
 	
 	public boolean isMoving() {
 		return moving;
@@ -24,11 +25,12 @@ public class Tank {
 		this.moving = moving;
 	}
 
-	public Tank(int x, int y, Dir dir) {
+	public Tank(int x, int y, Dir dir, TankFrame tf) {
 		super();
 		this.x = x;
 		this.y = y;
-		this.dir = dir; 
+		this.dir = dir;
+		this.tf = tf;
 	}
 
 	public int getX() {
@@ -60,14 +62,6 @@ public class Tank {
 	}
 	
 
-	public boolean isShooting() {
-		return shooting;
-	}
-
-	public void setShooting(boolean shooting) {
-		this.shooting = shooting;
-	}
-
 	public void paint(Graphics g) {
 		Color c = g.getColor();
 		g.setColor(Color.YELLOW);
@@ -96,6 +90,12 @@ public class Tank {
 		    break;		    
 		}
 		
+	}
+
+	public void fire() {
+		tf.b = new Bullet(this.getX(),this.getY(),this.getDir());
+//		Bullet b = new Bullet(this.getX(),this.getY(),this.getDir());
+//		tf.setB(b);
 	}
 	
 }
