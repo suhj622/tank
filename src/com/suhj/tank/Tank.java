@@ -11,7 +11,7 @@ public class Tank {
 	
 	private int x,y;
 	private Dir dir;
-	private final int SPEED = 10;
+	private final int SPEED = 5;
 	private boolean moving = false;
 	
 	public boolean isMoving() {
@@ -69,18 +69,18 @@ public class Tank {
 		
 		if(!moving) return;
 		
-		switch(getDir()) {
+		switch(dir) {
 		case LEFT:
-			setX(getX() - getSpeed());
+			x -= SPEED;
 			break;
 		case UP:
-			setY(getY() - getSpeed());
+			y -= SPEED;
 		    break;
 		case RIGHT:
-			setX(getX() + getSpeed());
+			x += SPEED;
 		    break;
 		case DOWN:
-			setY(getY() + getSpeed());
+			y += SPEED;
 		    break;		    
 		}
 		

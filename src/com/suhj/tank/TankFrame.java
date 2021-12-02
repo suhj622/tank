@@ -22,7 +22,8 @@ public class TankFrame extends Frame {
 //	private static Dir dir = Dir.DOWN;
 	
 	//用一个对象来代表坦克
-	Tank myTank = new Tank(200,200,Dir.DOWN);
+	Tank myTank = new Tank(200, 200, Dir.DOWN);
+	Bullet b = new Bullet(300, 300, Dir.DOWN);
 	
 	/**
 	 * 构造方法
@@ -64,7 +65,7 @@ public class TankFrame extends Frame {
 	public void paint(Graphics g) {
 		
 		myTank.paint(g);
-		
+		b.paint(g);		
 
  	}
 	
