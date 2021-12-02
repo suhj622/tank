@@ -17,7 +17,12 @@ import java.awt.event.WindowEvent;
 //从 Frame 类中继承，并且画出一个黑方块
 public class TankFrame extends Frame {
 	
-	int x = 200, y =200;
+//	private static int x = 200, y =200;
+//	private static final int  SPEED = 10;	
+//	private static Dir dir = Dir.DOWN;
+	
+	//用一个对象来代表坦克
+	Tank myTank = new Tank(200,200,Dir.DOWN);
 	
 	/**
 	 * 构造方法
@@ -30,7 +35,7 @@ public class TankFrame extends Frame {
 		 setVisible(true);
 		 
 		 
-		 this.addKeyListener(new MyKeyListener());
+		 addKeyListener(new MyKeyListener());
 		 
 		 addWindowListener(new WindowAdapter() {
 			@Override
@@ -57,10 +62,10 @@ public class TankFrame extends Frame {
 	 */
 	@Override
 	public void paint(Graphics g) {
-		//System.out.println("paint"); //测试是 paint 方法是否有被调用
-		g.fillRect(x, y, 50, 50);
-		//x += 10;
-		//y += 10;
+		
+		myTank.paint(g);
+		
+
  	}
 	
 	/**
@@ -83,14 +88,18 @@ public class TankFrame extends Frame {
 		@Override
 		public void keyPressed(KeyEvent e) {
 		    int key = e.getKeyCode();
+		    
 		    switch(key) {
-		    case KeyEvent.VK_LEFT: bL = true; break;
-		    case KeyEvent.VK_UP: bU = true;  break;		    
-		    case KeyEvent.VK_RIGHT: bR = true; break;
-		    case KeyEvent.VK_DOWN: bD = true; break;
-		    default:break;   
+		    	case KeyEvent.VK_LEFT: bL = true; break;
+		    	case KeyEvent.VK_UP: bU = true;  break;		    
+		    	case KeyEvent.VK_RIGHT: bR = true; break;
+		    	case KeyEvent.VK_DOWN: bD = true; break;
+		    	default:break;   
 		    }
-			//repaint();
+		    
+		    
+		    //设置坦克方向
+		    setMainTankDir();
 		    
 		}
 
@@ -102,15 +111,32 @@ public class TankFrame extends Frame {
 			
 		    int key = e.getKeyCode();
 		    switch(key) {
-		    case KeyEvent.VK_LEFT: bL = false; break;
-		    case KeyEvent.VK_UP: bU = false;  break;		    
-		    case KeyEvent.VK_RIGHT: bR = false; break;
-		    case KeyEvent.VK_DOWN: bD = false; break;
-		    default:break;
-		    }			
+		    	case KeyEvent.VK_LEFT: bL = false; break;
+		    	case KeyEvent.VK_UP: bU = false;  break;		    
+		    	case KeyEvent.VK_RIGHT: bR = false; break;
+		    	case KeyEvent.VK_DOWN: bD = false; break;
+		    	default:break;
+		    }
+		    
+		    //设置坦克方向
+		    setMainTankDir();
  
 		}
 		
+		/**
+		 * 设置坦克方向
+		 */
+		public void setMainTankDir() {
+			
+			if(bL) myTank.setDir(Dir.LEFT);  
+			if(bU) myTank.setDir(Dir.UP); 
+			if(bR) myTank.setDir(Dir.RIGHT);   
+			if(bD) myTank.setDir(Dir.DOWN);    
+			
+		}
+		
 	}
+
+
 
 }
