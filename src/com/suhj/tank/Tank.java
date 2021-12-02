@@ -17,7 +17,7 @@ public class Tank {
 		super();
 		this.x = x;
 		this.y = y;
-		this.dir = dir;
+		this.dir = dir; 
 	}
 
 	public int getX() {
