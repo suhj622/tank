@@ -124,14 +124,19 @@ public class TankFrame extends Frame {
 		}
 		
 		/**
-		 * 设置坦克方向
+		 * 设置坦克行动方向
 		 */
 		public void setMainTankDir() {
 			
-			if(bL) myTank.setDir(Dir.LEFT);  
-			if(bU) myTank.setDir(Dir.UP); 
-			if(bR) myTank.setDir(Dir.RIGHT);   
-			if(bD) myTank.setDir(Dir.DOWN);    
+			if(!bL && !bU && !bR && !bD) myTank.setMoving(false);
+			else { 
+				
+				myTank.setMoving(true);
+				if(bL) myTank.setDir(Dir.LEFT);  
+				if(bU) myTank.setDir(Dir.UP); 
+				if(bR) myTank.setDir(Dir.RIGHT);   
+				if(bD) myTank.setDir(Dir.DOWN);
+			}		
 			
 		}
 		

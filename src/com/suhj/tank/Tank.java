@@ -12,7 +12,16 @@ public class Tank {
 	private int x,y;
 	private Dir dir;
 	private final int SPEED = 10;
+	private boolean moving = false;
 	
+	public boolean isMoving() {
+		return moving;
+	}
+
+	public void setMoving(boolean moving) {
+		this.moving = moving;
+	}
+
 	public Tank(int x, int y, Dir dir) {
 		super();
 		this.x = x;
@@ -51,6 +60,14 @@ public class Tank {
 	public void paint(Graphics g) {
 		
 		g.fillRect(getX(), getY(), 50, 50);
+		move();
+		
+		
+	}
+
+	private void move() {
+		
+		if(!moving) return;
 		
 		switch(getDir()) {
 		case LEFT:
