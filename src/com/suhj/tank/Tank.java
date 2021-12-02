@@ -1,5 +1,6 @@
 package com.suhj.tank;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -13,6 +14,7 @@ public class Tank {
 	private Dir dir;
 	private final int SPEED = 5;
 	private boolean moving = false;
+	private boolean shooting = false;
 	
 	public boolean isMoving() {
 		return moving;
@@ -56,12 +58,22 @@ public class Tank {
 	public int getSpeed() {
 		return SPEED;
 	}
+	
+
+	public boolean isShooting() {
+		return shooting;
+	}
+
+	public void setShooting(boolean shooting) {
+		this.shooting = shooting;
+	}
 
 	public void paint(Graphics g) {
-		
+		Color c = g.getColor();
+		g.setColor(Color.YELLOW);
 		g.fillRect(getX(), getY(), 50, 50);
-		move();
-		
+		g.setColor(c);
+		move();		
 		
 	}
 
