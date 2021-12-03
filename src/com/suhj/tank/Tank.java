@@ -92,10 +92,8 @@ public class Tank {
 		
 	}
 
-	public void fire() {
-		tf.b = new Bullet(this.getX(),this.getY(),this.getDir());
-//		Bullet b = new Bullet(this.getX(),this.getY(),this.getDir());
-//		tf.setB(b);
+	public void fire() {		
+		tf.bullets.add(new Bullet(this.getX(),this.getY(),this.getDir(), this.tf)); 
 	}
 	
 }
