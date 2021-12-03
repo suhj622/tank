@@ -7,6 +7,11 @@ public class Main {
 		
 		TankFrame tf = new TankFrame();
 		
+		//初始化地方坦克
+		for(int i = 0; i < 5; i++) {
+			tf.tanks.add(new Tank(50 + i*80, 200, Dir.DOWN,tf));
+		}
+		
 		
 		//在主线程每隔 50 毫秒，调用一次 repaint 方法，repaint 方法会调用 paint 方法
 		while(true) {
