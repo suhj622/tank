@@ -154,8 +154,8 @@ public class Tank {
 	}
 
 	public void fire() {
-		int bX = this.getX() + Tank.WIDTH/2 - Bullet.WIDTH/2;
-		int bY = this.getY() + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
+		int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
+		int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
 		tf.bullets.add(new Bullet(bX, bY, this.getDir(), this.getGroup(), this.tf)); 
 	}
 
