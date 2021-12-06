@@ -27,7 +27,7 @@ public class TankFrame extends Frame {
 //	private static Dir dir = Dir.DOWN;
 	
 	//用一个对象来代表坦克
-	Tank myTank = new Tank(200, 400, Dir.DOWN, this);
+	Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this);
 	//装载一组子弹
 	List<Bullet> bullets = new ArrayList<>();
 	//一排地方坦克
