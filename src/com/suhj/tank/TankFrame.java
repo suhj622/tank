@@ -35,7 +35,7 @@ public class TankFrame extends Frame {
 	//一系列爆炸
 	List<Explode> explodes = new ArrayList<>();
 	
-	static final int GAME_WIDTH = 800 , GAME_HEIGHT = 600; ;
+	static final int GAME_WIDTH = 1080 , GAME_HEIGHT = 960; ;
 	
 	
 	
@@ -102,6 +102,8 @@ public class TankFrame extends Frame {
 		g.setColor(Color.WHITE);
 		g.drawString("子弹的数量：" + bullets.size(), 10, 60);
 		g.drawString("敌人的数量：" + tanks.size(), 10, 80);
+		g.drawString("爆炸的数量：" + explodes.size(), 10, 100);
+		
 		g.setColor(c);
 		
 		myTank.paint(g);
@@ -125,14 +127,14 @@ public class TankFrame extends Frame {
 			tanks.get(i).paint(g);
 		}
 		
-		//碰撞检测，如果发生碰撞则发生爆炸
+		//collision detect 碰撞检测
 		for (int i = 0; i < bullets.size(); i++) {
 			for(int j = 0; j < tanks.size(); j++) {
 				bullets.get(i).collideWith(tanks.get(j));
-				if (!tanks.get(j).isLiving()) {
-					new Audio("audio/explode.wav").start();
-					explodes.add(new Explode(tanks.get(j).getX(), tanks.get(j).getY(), this));					
-				}
+//				if (!tanks.get(j).isLiving()) {
+//					new Thread(() -> new Audio("audio/explode.wav").play()).start();
+//					explodes.add(new Explode(tanks.get(j).getX(), tanks.get(j).getY(), this));					
+//				}
 			}
 		}
 		

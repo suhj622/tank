@@ -21,8 +21,7 @@ public class Tank {
 	public static int WIDTH = ResourceMgr.tankD.getWidth();
 	public static int HEIGHT = ResourceMgr.tankD.getHeight();	
 	
-	private Random random = new Random();
- 	
+	private Random random = new Random(); 	
 	public Group getGroup() {
 		return group;
 	}
@@ -46,12 +45,14 @@ public class Tank {
 	}
 
 	public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
-		super();
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
 		this.group = group;
 		this.tf = tf;
+		if (this.group == Group.GOOD) {
+			this.moving = false;
+		}
 	}
 
 	public int getX() {
@@ -141,8 +142,15 @@ public class Tank {
 		    break;		    
 		}
 		
-		if(random.nextInt(10) > 8 ) this.fire();
+		if(this.group == Group.BAD && random.nextInt(100) > 95 ) this.fire();
 		
+		//有 4% 的几率，敌方坦克会随机选择一个方向
+		if (group == Group.BAD && random.nextInt(100) > 95) randomDir();		
+		
+	}
+
+	private void randomDir() {
+		this.dir = Dir.values()[random.nextInt(4)];		
 	}
 
 	public void fire() {

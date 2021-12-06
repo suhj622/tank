@@ -93,9 +93,11 @@ public class Bullet {
 		Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
 		Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
 		
+		//如果碰撞则发生爆炸
 		if(rect1.intersects(rect2)) {
 			tank.die();
 			this.die();
+			tf.explodes.add(new Explode(tank.getX(), tank.getY(), tf));
 		}
 	}
 
