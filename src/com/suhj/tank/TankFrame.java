@@ -32,7 +32,8 @@ public class TankFrame extends Frame {
 	List<Bullet> bullets = new ArrayList<>();
 	//一排地方坦克
 	List<Tank> tanks = new ArrayList<>();
-	Explode e = new Explode(100, 100, this);
+	//一系列爆炸
+	List<Explode> explodes = new ArrayList<>();
 	
 	static final int GAME_WIDTH = 800 , GAME_HEIGHT = 600; ;
 	
@@ -124,14 +125,15 @@ public class TankFrame extends Frame {
 			tanks.get(i).paint(g);
 		}
 		
-		//碰撞检测
+		//碰撞检测，如果发生碰撞则发生爆炸
 		for (int i = 0; i < bullets.size(); i++) {
 			for(int j = 0; j < tanks.size(); j++) {
 				bullets.get(i).collideWith(tanks.get(j));
+				if (!tanks.get(j).isLiving()) explodes.add(new Explode(tanks.get(j).getX(), tanks.get(j).getY(), this));
 			}
 		}
 		
-		e.paint(g);
+		for(int i = 0; i < explodes.size(); i++) explodes.get(i).paint(g);
  
  	}
 	

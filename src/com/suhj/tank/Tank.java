@@ -41,6 +41,10 @@ public class Tank {
 		this.moving = moving;
 	}
 
+	public boolean isLiving() {
+		return living;
+	}
+
 	public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
 		super();
 		this.x = x;
