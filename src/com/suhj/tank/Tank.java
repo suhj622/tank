@@ -145,7 +145,17 @@ public class Tank {
 		if(this.group == Group.BAD && random.nextInt(100) > 95 ) this.fire();
 		
 		//有 4% 的几率，敌方坦克会随机选择一个方向
-		if (group == Group.BAD && random.nextInt(100) > 95) randomDir();		
+		if (group == Group.BAD && random.nextInt(100) > 95) randomDir();
+		
+		boundsCheck();
+		
+	}
+
+	private void boundsCheck() {
+		if (this.x < 0) x = 0;
+		if (this.y < 30) y =30;
+		if (this.x > TankFrame.GAME_WIDTH - Tank.WIDTH) x = TankFrame.GAME_WIDTH - Tank.WIDTH;
+		if (this.y > TankFrame.GAME_HEIGHT - Tank.HEIGHT) y = TankFrame.GAME_HEIGHT - Tank.HEIGHT;
 		
 	}
 
