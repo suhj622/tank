@@ -21,8 +21,8 @@ public class Tank {
 	
 	Rectangle rect = new Rectangle();	
 	
-	public static int WIDTH = ResourceMgr.tankD.getWidth();
-	public static int HEIGHT = ResourceMgr.tankD.getHeight();	
+	public static int WIDTH = ResourceMgr.GoodTankD.getWidth();
+	public static int HEIGHT = ResourceMgr.GoodTankD.getHeight();	
 	
 	private Random random = new Random(); 	
 	public Group getGroup() {
@@ -113,16 +113,16 @@ public class Tank {
 		switch(dir) {
 		
 		case LEFT:
-			g.drawImage(ResourceMgr.tankL, x, y, null);
+			g.drawImage(this.group == Group.GOOD ? ResourceMgr.GoodTankL : ResourceMgr.BadTankL, x, y, null);
 			break;
 		case UP:
-			g.drawImage(ResourceMgr.tankU, x, y, null);
+			g.drawImage(this.group == Group.GOOD ? ResourceMgr.GoodTankU : ResourceMgr.BadTankU, x, y, null);
 		    break;
 		case RIGHT:
-			g.drawImage(ResourceMgr.tankR, x, y, null);
+			g.drawImage(this.group == Group.GOOD ? ResourceMgr.GoodTankR : ResourceMgr.BadTankR, x, y, null);
 		    break;
 		case DOWN:
-			g.drawImage(ResourceMgr.tankD, x, y, null);
+			g.drawImage(this.group == Group.GOOD ? ResourceMgr.GoodTankD : ResourceMgr.BadTankD, x, y, null);
 		    break;		
 		
 		}
