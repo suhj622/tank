@@ -15,6 +15,9 @@ public class Main {
 			tf.tanks.add(new Tank(50 + i*80, 200, Dir.DOWN, Group.BAD, tf));
 		}
 		
+		//设置背景声音
+		new Thread(() -> new Audio("audio/war1.wav").loop()).start();
+		
 		
 		//在主线程每隔 50 毫秒，调用一次 repaint 方法，repaint 方法会调用 paint 方法
 		while(true) {

@@ -23,24 +23,16 @@ public class Tank {
 	
 	public static int WIDTH = ResourceMgr.GoodTankD.getWidth();
 	public static int HEIGHT = ResourceMgr.GoodTankD.getHeight();	
+	private TankFrame tf;
 	
 	private Random random = new Random(); 	
+	
 	public Group getGroup() {
 		return group;
 	}
-
-	public void setGroup(Group group) {
-		this.group = group;
-	}
-
-	private TankFrame tf;
 	
 	public boolean isMoving() {
 		return moving;
-	}
-
-	public void setMoving(boolean moving) {
-		this.moving = moving;
 	}
 
 	public boolean isLiving() {
@@ -69,24 +61,12 @@ public class Tank {
 		return x;
 	}
 
-	public void setX(int x) {
-		this.x = x;
-	}
-
 	public int getY() {
 		return y;
 	}
 
-	public void setY(int y) {
-		this.y = y;
-	}
-
 	public Dir getDir() {
 		return dir;
-	}
-
-	public void setDir(Dir dir) {
-		this.dir = dir;
 	}
 
 	public int getSpeed() {
@@ -193,5 +173,13 @@ public class Tank {
 	public void die() {
 		this.living = false;		
 	}
+
+	public void setDir(Dir dir) {
+		this.dir = dir;
+	}
+
+	public void setMoving(boolean moving) {
+		this.moving = moving;
+	}	
 	
 }

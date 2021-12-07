@@ -23,6 +23,8 @@ public class PropertyMgr {
 		}
 	}
 	
+	//可以添加一个返回 int 类型返回值的方法
+	
 	public static Object get(String key) {
 		if (props == null) return null;
 		return props.get(key);
