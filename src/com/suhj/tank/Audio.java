@@ -30,7 +30,6 @@ public class Audio extends Thread {
 			audioFormat = audioInputStream.getFormat();
 			dataLine_info = new DataLine.Info(SourceDataLine.class, audioFormat);
 			sourceDataLine = (SourceDataLine) AudioSystem.getLine(dataLine_info);
- 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

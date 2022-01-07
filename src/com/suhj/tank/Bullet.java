@@ -4,12 +4,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class Bullet {
+public class Bullet extends GameObject {
 	
 	private static final int SPEED = 10;
 	public static int WIDTH = ResourceMgr.bulletD.getWidth();
 	public static int HEIGHT = ResourceMgr.bulletD.getHeight();
-	private TankFrame tf = null;
+	private GameModel gm = null;
 	
 	int x,y;
 	private Dir dir;
@@ -19,12 +19,12 @@ public class Bullet {
 	
 	Rectangle rect = new Rectangle();
 	
-	public Bullet(int x, int y,Dir dir, Group group, TankFrame tf) {
+	public Bullet(int x, int y,Dir dir, Group group, GameModel gm) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
 		this.group = group;
-		this.tf = tf;
+		this.gm = gm;
 		
 		rect.x = this.x;
 		rect.y = this.y;
@@ -41,10 +41,11 @@ public class Bullet {
 		this.group = group;
 	}
 
+	@Override
 	public void paint(Graphics g) {
 		
 		if(!living) {
-			tf.bullets.remove(this);
+			gm.getBullets().remove(this);
 		}
 		
 //		Color c = g.getColor();
@@ -116,7 +117,7 @@ public class Bullet {
 			this.die();
 			int eX = tank.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
 			int eY = tank.getY() + Tank.HEIGHT/2 - Explode.HEIGHT/2;
-			tf.explodes.add(new Explode(eX, eY, tf));
+			gm.getExplodes().add(new Explode(eX, eY, gm));
 		}
 	}
 

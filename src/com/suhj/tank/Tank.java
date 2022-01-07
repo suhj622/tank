@@ -10,7 +10,7 @@ import java.util.Random;
  * @author Haojie
  *
  */
-public class Tank {
+public class Tank extends GameObject {
 	
 	private int x,y;
 	private Dir dir;
@@ -23,7 +23,7 @@ public class Tank {
 	
 	public static int WIDTH = ResourceMgr.GoodTankD.getWidth();
 	public static int HEIGHT = ResourceMgr.GoodTankD.getHeight();	
-	private TankFrame tf;
+	private GameModel gm;
 	
 	private Random random = new Random(); 	
 	
@@ -39,21 +39,17 @@ public class Tank {
 		return living;
 	}
 
-	public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
+	public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
 		this.group = group;
-		this.tf = tf;
+		this.gm = gm;
 		
 		rect.x = this.x;
 		rect.y = this.y;
 		rect.width = this.WIDTH;
 		rect.height = this.HEIGHT;	
-		
-//		if (this.group == Group.GOOD) {
-//			this.moving = false;
-//		}		
 		
 	}
 
@@ -81,6 +77,7 @@ public class Tank {
 		return HEIGHT;
 	}
 
+	@Override
 	public void paint(Graphics g) {
 		
 //		Color c = g.getColor();
@@ -88,7 +85,7 @@ public class Tank {
 //		g.fillRect(getX(), getY(), 50, 50);
 //		g.setColor(c);
 		
-		if(!living) tf.tanks.remove(this);
+		if(!living) gm.getEnemyTanks().remove(this);
 		
 		switch(dir) {
 		
@@ -167,7 +164,7 @@ public class Tank {
 	public void fire() {
 		int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
 		int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
-		tf.bullets.add(new Bullet(bX, bY, this.getDir(), this.getGroup(), this.tf)); 
+		gm.getBullets().add(new Bullet(bX, bY, this.getDir(), this.getGroup(), this.gm)); 
 	}
 
 	public void die() {

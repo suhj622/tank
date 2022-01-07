@@ -8,10 +8,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-//import java.util.Iterator;
-import java.util.List;
-
 /**
  * 
  * @author Haojie
@@ -22,46 +18,27 @@ import java.util.List;
 //从 Frame 类中继承，并且画出一个黑方块
 public class TankFrame extends Frame {
 	
-//	private static int x = 200, y =200;
-//	private static final int  SPEED = 10;	
-//	private static Dir dir = Dir.DOWN;
-	
-	//用一个对象来代表坦克
-	Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this);
-	//装载一组子弹
-	List<Bullet> bullets = new ArrayList<>();
-	//一排地方坦克
-	List<Tank> tanks = new ArrayList<>();
-	//一系列爆炸
-	List<Explode> explodes = new ArrayList<>();
-	
-	static final int GAME_WIDTH = 1080 , GAME_HEIGHT = 960; ;
-	
-	
-	
+	//set Game Frame
+	static final int GAME_WIDTH = 1080 , GAME_HEIGHT = 960;
+	private GameModel gm;
+		
 	/**
-	 * 构造方法
+	 * 构造方法:生成游戏窗口
 	 */
-	public TankFrame() {
+	public TankFrame(GameModel gm) {
 		
 		 setSize(GAME_WIDTH, GAME_HEIGHT);
 		 setResizable(false);
 		 setTitle("tank war");
-		 setVisible(true);
-		 
-		 
-		 addKeyListener(new MyKeyListener());
-		 
+		 setVisible(true);		 		 
+		 addKeyListener(new MyKeyListener());		 
 		 addWindowListener(new WindowAdapter() {
-
 			@Override
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);
-			}
-			 
-			 
-		 });		
-		
+			}			 
+		 });		 
+		 this.gm = gm;
 	}
 
 	/**
@@ -79,8 +56,7 @@ public class TankFrame extends Frame {
 	public void update(Graphics g) {		
 		if(offScreenImage == null) {
 			offScreenImage = this.createImage(GAME_WIDTH,GAME_HEIGHT);
-		}
-		
+		}		
 		Graphics gOffScreen = offScreenImage.getGraphics();
 		Color c = gOffScreen.getColor();
 		gOffScreen.setColor(Color.BLACK);
@@ -98,47 +74,7 @@ public class TankFrame extends Frame {
 	@Override
 	public void paint(Graphics g) {
 		
-		Color c = g.getColor();
-		g.setColor(Color.WHITE);
-		g.drawString("子弹的数量：" + bullets.size(), 10, 60);
-		g.drawString("敌人的数量：" + tanks.size(), 10, 80);
-		g.drawString("爆炸的数量：" + explodes.size(), 10, 100);
-		
-		g.setColor(c);
-		
-		myTank.paint(g);
-
-		//这种写法会引发问题 Exception in thread "AWT-EventQueue-0" java.util.ConcurrentModificationException
-//		for(Bullet b: bullets) {
-//			b.paint(g);
-//		}
-		
-		
-		for(int i =0; i < bullets.size(); i++) {
-			bullets.get(i).paint(g);
-		}
-		
-//		for(Iterator<Bullet> it = bullets.iterator(); it.hasNext();) {
-//			Bullet b = it.next();
-//			if(!b.live) it.remove();
-//		}
-		
-		for(int i = 0; i < tanks.size(); i++) {
-			tanks.get(i).paint(g);
-		}
-		
-		//collision detect 碰撞检测
-		for (int i = 0; i < bullets.size(); i++) {
-			for(int j = 0; j < tanks.size(); j++) {
-				bullets.get(i).collideWith(tanks.get(j));
-//				if (!tanks.get(j).isLiving()) {
-//					new Thread(() -> new Audio("audio/explode.wav").play()).start();
-//					e xplodes.add(new Explode(tanks.get(j).getX(), tanks.get(j).getY(), this));					
-//				}
-			}
-		}
-		
-		for(int i = 0; i < explodes.size(); i++) explodes.get(i).paint(g);
+		gm.paint(g);
  
  	}
 	
@@ -191,7 +127,7 @@ public class TankFrame extends Frame {
 		    	case KeyEvent.VK_UP: bU = false;  break;		    
 		    	case KeyEvent.VK_RIGHT: bR = false; break;
 		    	case KeyEvent.VK_DOWN: bD = false; break;
-		    	case KeyEvent.VK_CONTROL:myTank.fire(); break;
+		    	case KeyEvent.VK_CONTROL:gm.getMainTank().fire(); break;
 		    	default:break;
 		    }
 		    
@@ -205,13 +141,13 @@ public class TankFrame extends Frame {
 		 */
 		public void setMainTankDir() {
 			
-			if(!bL && !bU && !bR && !bD) myTank.setMoving(false);
+			if(!bL && !bU && !bR && !bD) gm.getMainTank().setMoving(false);
 			else { 				
-				myTank.setMoving(true);
-				if(bL) myTank.setDir(Dir.LEFT);  
-				if(bU) myTank.setDir(Dir.UP); 
-				if(bR) myTank.setDir(Dir.RIGHT);   
-				if(bD) myTank.setDir(Dir.DOWN);
+				gm.getMainTank().setMoving(true);
+				if(bL) gm.getMainTank().setDir(Dir.LEFT);  
+				if(bU) gm.getMainTank().setDir(Dir.UP); 
+				if(bR) gm.getMainTank().setDir(Dir.RIGHT);   
+				if(bD) gm.getMainTank().setDir(Dir.DOWN);
 			}				
 		}
 		
