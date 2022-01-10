@@ -12,6 +12,8 @@ import java.util.Random;
 public class Tank extends GameObject {
 	
 	private int x,y;
+	//save the pre coord before the current steep
+	private int preX,preY;
 	private Dir dir;
 	private final int SPEED = 5;
 	private boolean moving = false;
@@ -117,6 +119,8 @@ public class Tank extends GameObject {
 
 	private void move() {
 		
+		this.preX = this.x;
+		this.preY = this.y;
 		if(group == Group.GOOD && !moving) return;
 		
 		switch(dir) {
@@ -186,6 +190,22 @@ public class Tank extends GameObject {
 
 	public GameModel getGm() {
 		return gm;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getPreX() {
+		return preX;
+	}
+
+	public int getPreY() {
+		return preY;
 	}
 	
 	

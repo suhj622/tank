@@ -8,5 +8,5 @@ package com.suhj.tank;
  * 碰撞器接口
  */
 public interface Collider {
-	public abstract void  collide(GameObject o1, GameObject o2);
+	public abstract boolean collide(GameObject o1, GameObject o2);
 }

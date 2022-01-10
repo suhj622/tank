@@ -21,7 +21,7 @@ public class GameModel {
 	private List<Bullet> bullets = new ArrayList<>();
 	//gameObjectList:hold all game objects
 	private List<GameObject> gameObjectList = new LinkedList<>();
-	private ChainOfCollide chainOfCollide = new ChainOfCollide();
+	private CollideChain chainOfCollide = new CollideChain();
 
 	//initialize the GameModel
 	public GameModel() {
