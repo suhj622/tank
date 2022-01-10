@@ -85,7 +85,9 @@ public class Tank extends GameObject {
 //		g.fillRect(getX(), getY(), 50, 50);
 //		g.setColor(c);
 		
-		if(!living) gm.getEnemyTanks().remove(this);
+		if(!living) {
+			gm.deleteGameObject(this);
+		}
 		
 		switch(dir) {
 		
@@ -164,7 +166,7 @@ public class Tank extends GameObject {
 	public void fire() {
 		int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
 		int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
-		gm.getBullets().add(new Bullet(bX, bY, this.getDir(), this.getGroup(), this.gm)); 
+		gm.addGameObject(new Bullet(bX, bY, this.getDir(), this.getGroup(), this.gm)); 
 	}
 
 	public void die() {
