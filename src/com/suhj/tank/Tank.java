@@ -1,6 +1,5 @@
 package com.suhj.tank;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.Random;
@@ -19,7 +18,7 @@ public class Tank extends GameObject {
 	private boolean living = true ;
 	private Group group = Group.BAD;
 	
-	Rectangle rect = new Rectangle();	
+	private Rectangle rect = new Rectangle();	
 	
 	public static int WIDTH = ResourceMgr.GoodTankD.getWidth();
 	public static int HEIGHT = ResourceMgr.GoodTankD.getHeight();	
@@ -75,6 +74,10 @@ public class Tank extends GameObject {
 
 	public static int getHEIGHT() {
 		return HEIGHT;
+	}	
+
+	public Rectangle getRect() {
+		return rect;
 	}
 
 	@Override
@@ -179,6 +182,12 @@ public class Tank extends GameObject {
 
 	public void setMoving(boolean moving) {
 		this.moving = moving;
-	}	
+	}
+
+	public GameModel getGm() {
+		return gm;
+	}
+	
+	
 	
 }

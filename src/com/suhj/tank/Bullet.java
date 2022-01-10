@@ -17,7 +17,7 @@ public class Bullet extends GameObject {
 	private boolean living = true;
 	private Group group = Group.BAD;
 	
-	Rectangle rect = new Rectangle();
+	private Rectangle rect = new Rectangle();
 	
 	public Bullet(int x, int y,Dir dir, Group group, GameModel gm) {
 		this.x = x;
@@ -99,32 +99,38 @@ public class Bullet extends GameObject {
 		
 	}
 
-	/**
-	 * 碰撞检测
-	 * @param tank
-	 */
-	public void collideWith(Tank tank) {
-		if(this.group == tank.getGroup()) return;
-		//set main is not die
-		if(tank.getGroup() == Group.GOOD) return;
-		
-		//TODO: 用一个 rect 来记录子弹的位置
-		//每次做碰撞检测，都需要重新生成对象 rect1、rect2，无引用对象过多会引发垃圾回收器回收垃圾对象 2*m*n 个对象
-		//Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
-		//Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
-		
-		//如果碰撞则发生爆炸
-		if(rect.intersects(tank.rect)) {
-			tank.die();
-			this.die();
-			int eX = tank.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
-			int eY = tank.getY() + Tank.HEIGHT/2 - Explode.HEIGHT/2;
-			gm.addGameObject(new Explode(eX, eY, gm));
-		}
+//	/**
+//	 * 碰撞检测
+//	 * @param tank
+//	 */
+//	public void collideWith(Tank tank) {
+//		if(this.group == tank.getGroup()) return;
+//		//set main is not die
+//		if(tank.getGroup() == Group.GOOD) return;
+//		
+//		//TODO: 用一个 rect 来记录子弹的位置
+//		//每次做碰撞检测，都需要重新生成对象 rect1、rect2，无引用对象过多会引发垃圾回收器回收垃圾对象 2*m*n 个对象
+//		//Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
+//		//Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
+//		
+//		//如果碰撞则发生爆炸
+//		if(rect.intersects(tank.rect)) {
+//			tank.die();
+//			this.die();
+//			int eX = tank.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
+//			int eY = tank.getY() + Tank.HEIGHT/2 - Explode.HEIGHT/2;
+//			gm.addGameObject(new Explode(eX, eY, gm));
+//		}
+//	}
+
+	public void die() {
+		this.living = false;		
 	}
 
-	private void die() {
-		this.living = false;		
-	}	
+	public Rectangle getRect() {
+		return rect;
+	}
+	
+	
 
 }

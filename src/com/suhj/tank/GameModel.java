@@ -21,6 +21,7 @@ public class GameModel {
 	private List<Bullet> bullets = new ArrayList<>();
 	//gameObjectList:hold all game objects
 	private List<GameObject> gameObjectList = new LinkedList<>();
+	private ChainOfCollide chainOfCollide = new ChainOfCollide();
 
 	//initialize the GameModel
 	public GameModel() {
@@ -57,14 +58,10 @@ public class GameModel {
 		}
 		
 		
-		//collision detect 碰撞检测
-		for (int i = 0; i < this.bullets.size(); i++) {
-			for(int j = 0; j < this.enemyTanks.size(); j++) {
-				this.bullets.get(i).collideWith(this.enemyTanks.get(j));
-//				if (!tanks.get(j).isLiving()) {
-//					new Thread(() -> new Audio("audio/explode.wav").play()).start();
-//					e xplodes.add(new Explode(tanks.get(j).getX(), tanks.get(j).getY(), this));					
-//				}
+
+		for(int i = 0; i < this.gameObjectList.size(); i++) {
+			for(int j = i + 1; j < this.gameObjectList.size(); j ++) {
+				this.chainOfCollide.collide(this.gameObjectList.get(i), this.gameObjectList.get(j));
 			}
 		}
 		
