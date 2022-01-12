@@ -16,10 +16,8 @@ public class TankToTankCollider implements Collider {
 			Tank tank1 = (Tank)o1;
 			Tank tank2 = (Tank)o2;			
 			if(tank1.getRect().intersects(tank2.getRect())) {
-				tank1.setX(tank1.getPreX());
-				tank1.setY(tank1.getPreY());
-				tank2.setX(tank2.getPreX());
-				tank2.setY(tank2.getPreY());
+				tank1.back();
+				tank2.back();
 				return false;
 			}			
 		}

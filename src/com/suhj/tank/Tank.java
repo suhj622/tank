@@ -208,6 +208,11 @@ public class Tank extends GameObject {
 		return preY;
 	}
 	
+	public void back() {
+		this.setX(preX);
+		this.setY(preY);
+	}
+	
 	
 	
 }
